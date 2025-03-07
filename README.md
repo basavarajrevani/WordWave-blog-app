@@ -11,8 +11,9 @@ Create a .env file in the root directory.
 Add the necessary environment variables (e.g., API endpoint). Example:
 
 VITE_API_BASE_URL=http://localhost:4005/api
-Run the project
 
+
+Run the project
 cd backend 
 
 npm start
