@@ -14,6 +14,7 @@ VITE_API_BASE_URL=http://localhost:4005/api
 
 
 Run the project
+
 cd backend 
 
 npm start
