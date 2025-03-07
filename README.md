@@ -13,9 +13,11 @@ Add the necessary environment variables (e.g., API endpoint). Example:
 VITE_API_BASE_URL=http://localhost:4005/api
 Run the project
 
-cd backend npm start
+cd backend 
+npm start
 
-cd frontend npm run dev
+cd frontend
+npm run dev
 
 This will start the development server at http://localhost:5173 (or a similar address).
 
