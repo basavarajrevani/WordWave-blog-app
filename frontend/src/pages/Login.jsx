@@ -16,8 +16,12 @@ function Login() {
     e.preventDefault();
 
     try {
+      const API_BASE_URL = process.env.VITE_API_BASE_URL; //  new added Get the API base URL from the environment variable
+      const LOGIN_URL = `${API_BASE_URL}/users/login`; // new added Construct the login URL
+      
       const { data } = await axios.post(
-        "http://localhost:4005/api/users/login",
+        LOGIN_url,
+        // "http://localhost:4005/api/users/login",
         { email, password, role },
         {
           withCredentials: true,
