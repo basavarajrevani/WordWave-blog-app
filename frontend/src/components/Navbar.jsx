@@ -16,11 +16,10 @@ function Navbar() {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new added
-      const LOGOUT_URL = `${API_BASE_URL}/users/logout`;  // new added
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const LOGOUT_URL = `${API_BASE_URL}/users/logout`;
       const { data } = await axios.get(
         LOGOUT_URL,
-        // "http://localhost:4005/api/users/logout",
         { withCredentials: true }
       );
       console.log(data);
@@ -154,6 +153,35 @@ function Navbar() {
               >
                 CONTACT
               </Link>
+              {/* Add Dashboard and Logout buttons for mobile view */}
+              {isAuthenticated && profile?.user?.role === "admin" ? (
+                <Link
+                  to="/dashboard"
+                  onClick={() => setShow(!show)}
+                  className="hover:text-blue-500"
+                >
+                  DASHBOARD
+                </Link>
+              ) : null}
+              {!isAuthenticated ? (
+                <Link
+                  to="/Login"
+                  onClick={() => setShow(!show)}
+                  className="hover:text-blue-500"
+                >
+                  LOGIN
+                </Link>
+              ) : (
+                <button
+                  onClick={(e) => {
+                    handleLogout(e);
+                    setShow(!show); // Close the menu after logout
+                  }}
+                  className="hover:text-blue-500"
+                >
+                  LOGOUT
+                </button>
+              )}
             </ul>
           </div>
         )}
