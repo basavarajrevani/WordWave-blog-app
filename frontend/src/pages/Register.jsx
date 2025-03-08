@@ -40,8 +40,11 @@ function Register() {
     formData.append("education", education);
     formData.append("photo", photo);
     try {
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const REGISTER_URL = `${API_BASE_URL}/users/register`;
       const { data } = await axios.post(
-        "http://localhost:4005/api/users/register",
+        REGISTER_URL,
+        // "http://localhost:4005/api/users/register",
         formData,
         {
           withCredentials: true,
