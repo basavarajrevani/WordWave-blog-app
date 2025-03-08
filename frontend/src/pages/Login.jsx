@@ -16,12 +16,12 @@ function Login() {
     e.preventDefault();
 
     try {
-      const API_BASE_URL = process.env.VITE_API_BASE_URL; //  new added Get the API base URL from the environment variable
-      const LOGIN_URL = `${API_BASE_URL}/users/login`; // new added Construct the login URL
-      
+      const API_BASE_URL = process.env.VITE_API_BASE_URL; // Get the API base URL from the environment variable
+      const LOGIN_URL = `${API_BASE_URL}/users/login`; // Construct the login URL
+
       const { data } = await axios.post(
-        LOGIN_url,
-        // "http://localhost:4005/api/users/login",
+        LOGIN_URL,
+       // "http://localhost:4005/api/users/login",
         { email, password, role },
         {
           withCredentials: true,
@@ -30,9 +30,13 @@ function Login() {
           },
         }
       );
+      if (data){
+      
       console.log(data);
+      if (data.token){
       // Store the token in localStorage
       localStorage.setItem("jwt", data.token); // storing token in localStorage so that if user refreshed the page it will not redirect again in login
+      }
       toast.success(data.message || "User Logined successfully", {
         duration: 3000,
       });
@@ -42,7 +46,12 @@ function Login() {
       setPassword("");
       setRole("");
       navigateTo("/");
-    } catch (error) {
+    } else {
+      console.error("Login failed: API returned empty data");
+    toast.error("Login failed: Please try again.");
+    }
+  }  
+    catch (error) {
       console.log(error);
       toast.error(
         error.response.data.message || "Please fill the required fields",
