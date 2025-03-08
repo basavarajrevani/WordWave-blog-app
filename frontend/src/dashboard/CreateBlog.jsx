@@ -30,8 +30,11 @@ function CreateBlog() {
 
     formData.append("blogImage", blogImage);
     try {
+      const API_BASE_URL = process.env.VITE_API_BASE_URL; //NEW ADDED 
+      const CREATE_BLOG_URL = `${API_BASE_URL}/blogs/create`; // NEW ADDED 
       const { data } = await axios.post(
-        "http://localhost:4005/api/blogs/create",
+        CREATE_BLOG_URL,
+       // "http://localhost:4005/api/blogs/create",
         formData,
         {
           withCredentials: true,
