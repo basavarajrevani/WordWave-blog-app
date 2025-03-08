@@ -15,8 +15,11 @@ export const AuthProvider = ({ children }) => {
         let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage (Go to login.jsx)
         console.log(token);
         if (token) {
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new added
+        const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;   // new added
           const { data } = await axios.get(
-            "http://localhost:4005/api/users/my-profile",
+            MY_PROFILE_URL,
+            // "http://localhost:4005/api/users/my-profile",
             {
               withCredentials: true,
               headers: {
@@ -35,8 +38,11 @@ export const AuthProvider = ({ children }) => {
 
     const fetchBlogs = async () => {
       try {
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;   // NEW ADDED
+        const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`; ///NEW ADDED 
         const { data } = await axios.get(
-          "http://localhost:4005/api/blogs/all-blogs",
+          ALL_BLOGS_URL,
+          // "http://localhost:4005/api/blogs/all-blogs",
           { withCredentials: true }
         );
         console.log(data);
