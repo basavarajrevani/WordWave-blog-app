@@ -8,8 +8,11 @@ function MyBlogs() {
   useEffect(() => {
     const fetchMyBlogs = async () => {
       try {
+        const API_BASE_URL = process.env.VITE_API_BASE_URL; // NEW ADD
+        const MY_BLOG_URL = `${API_BASE_URL}/blogs/my-blog`; // NEW ADD
         const { data } = await axios.get(
-          "http://localhost:4005/api/blogs/my-blog",
+          MY_BLOG_URL,
+          // "http://localhost:4005/api/blogs/my-blog",
           { withCredentials: true }
         );
         console.log(data);
@@ -21,18 +24,18 @@ function MyBlogs() {
     fetchMyBlogs();
   }, []);
 
-  const handleDelete = async (id) => {
-    await axios
-      .delete(`http://localhost:4005/api/blogs/delete/${id}`, {
+const handleDelete = async (id) => {
+    try {
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;   // NEW ADD
+      const DELETE_BLOG_URL = `${API_BASE_URL}/blogs/delete/${id}`;  // NEW ADD
+      const res = await axios.delete(DELETE_BLOG_URL, {
         withCredentials: true,
-      })
-      .then((res) => {
-        toast.success(res.data.message || "Blog deleted successfully");
-        setMyBlogs((value) => value.filter((blog) => blog._id !== id));
-      })
-      .catch((error) => {
-        toast.error(error.response.message || "Failed to delete blog");
       });
+      toast.success(res.data.message || "Blog deleted successfully");
+      setMyBlogs((value) => value.filter((blog) => blog._id !== id));
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete blog");
+    }
   };
   return (
     <div>
