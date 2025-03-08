@@ -10,8 +10,11 @@ function Detail() {
   useEffect(() => {
     const fetchblogs = async () => {
       try {
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const SINGLE_BLOG_URL = `${API_BASE_URL}/blogs/single-blog/${id}`;
         const { data } = await axios.get(
-          `http://localhost:4005/api/blogs/single-blog/${id}`,
+          SINGLE_BLOG_URL,
+          // `http://localhost:4005/api/blogs/single-blog/${id}`,
 
           {
             withCredentials: true,
@@ -20,14 +23,24 @@ function Detail() {
             },
           }
         );
-        console.log(data);
-        setblogs(data);
+        if (data) { // Check if data exists
+          console.log("API Response Data:", data);
+          setBlog(data);
+        } else {
+          console.warn("API request successful, but data is empty");
+          toast.error("Failed to load blog data.");
+        }
       } catch (error) {
-        console.log(error);
+        console.error("Error fetching blog:", error);
+        toast.error("Failed to load blog. Please try again.");
       }
     };
-    fetchblogs();
+    fetchBlog();
   }, [id]);
+
+  if (!blog) { // Check if blog is null
+    return <p>Loading...</p>; // Or a better loading indicator
+  }
   return (
     <div>
       <div>
