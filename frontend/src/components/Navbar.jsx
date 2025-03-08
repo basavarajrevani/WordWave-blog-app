@@ -19,7 +19,7 @@ function Navbar() {
       const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new added
       const LOGOUT_URL = `${API_BASE_URL}/users/logout`;  // new added
       const { data } = await axios.get(
-        LOGOUT_url,
+        LOGOUT_URL,
         // "http://localhost:4005/api/users/logout",
         { withCredentials: true }
       );
