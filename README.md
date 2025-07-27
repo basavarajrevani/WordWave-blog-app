@@ -175,4 +175,4 @@ This project is for learning and demonstration purposes.
 
 ---
 
-*Happy
+*Happy blogging with WordWave!*
