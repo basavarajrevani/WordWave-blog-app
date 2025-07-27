@@ -1,60 +1,178 @@
-Getting Started
+# WordWave Blog App
 
-Step 1: Install the template
-Install dependencies:
+A full-stack blogging platform where users can register, log in, create, view, and manage blogs. Features include user authentication, role-based access (admin/user), image uploads, and a modern, responsive UI.
 
-npm install  # or yarn install or pnpm install
-Configure environment variables:
+---
 
-Create a .env file in the root directory.
+## 🚀 Features
 
-Add the necessary environment variables (e.g., API endpoint). Example:
+- **User Authentication:** Register, login, logout with JWT-based authentication (stored in secure cookies)
+- **Role-based Access:** Admin and user roles with protected routes
+- **Blog Management:** Create, view, and manage blogs with images
+- **Image Uploads:** User and blog images stored on Cloudinary
+- **Responsive Design:** Mobile-friendly UI with Tailwind CSS
+- **Admin Dashboard:** Manage blogs and users (admin only)
+- **Social Links:** Instagram, LinkedIn, GitHub in the footer
+- **Deployed on Render:** Separate deployments for frontend and backend
 
-VITE_API_BASE_URL=http://localhost:4005/api
+---
 
+## 🗂️ Folder Structure
 
-Run the project
+```
+wordwave-blog-app/
+├── backend/                # Express.js API, MongoDB, authentication, image upload
+│   ├── controller/         # Controllers (user, blog, etc.)
+│   ├── middleware/         # Auth and role middleware
+│   ├── models/             # Mongoose models
+│   ├── jwt/                # JWT token and cookie helpers
+│   ├── index.js            # Entry point for backend
+│   └── ...                 # Other backend files
+├── frontend/               # React + Vite + Tailwind CSS
+│   ├── src/
+│   │   ├── components/     # Navbar, Footer, etc.
+│   │   ├── dashboard/      # Dashboard components
+│   │   ├── context/        # React Context (e.g., AuthProvider)
+│   │   ├── pages/          # Main pages (Blogs, Detail, Login, etc.)
+│   │   ├── App.jsx         # Main app component
+│   │   └── main.jsx        # Entry point
+│   ├── public/             # Static assets
+│   ├── .env                # Frontend environment variables
+│   ├── package.json
+│   └── README.md
+└── README.md               # Project documentation
+```
 
-cd backend 
+---
 
-npm start
+## ⚙️ Getting Started (Development)
 
-cd frontend
+### 1. Clone the Repository
 
-npm run dev
+```bash
+git clone https://github.com/yourusername/wordwave-blog-app.git
+cd wordwave-blog-app
+```
 
-This will start the development server at http://localhost:5173 (or a similar address).
+### 2. Backend Setup
 
-Building for Production
-To create a production build of the application:
+```bash
+cd backend
+npm install
+```
 
-npm run build  # or yarn build or pnpm build
+- Create a `.env` file in `/backend` with:
 
-## Folder structure of frontend folder
+    ```
+    PORT=4005
+    MONOGO_URL=your_mongodb_connection_string
+    JWT_SECRET_KEY=your_jwt_secret
+    CLOUD_NAME=your_cloudinary_cloud_name
+    CLOUD_API_KEY=your_cloudinary_api_key
+    CLOUD_SECRET_KEY=your_cloudinary_secret
+    ```
 
-frontend/  
-├── src/  
-│   ├── components/        # Reusable React components  
-│   ├── dashboard/         # Components specific to the dashboard  
-│   ├── context/           # React Context providers (e.g., AuthContext)  
-│   ├── pages/             # Main pages of the application  
-│   ├── App.jsx            # Main application component  
-│   ├── main.jsx           # Entry point for the React application  
-│   └── index.css          # Global styles  
-├── public/                # Static assets (e.g., images)  
-├── .gitignore             # Specifies intentionally untracked files that Git should ignore  
-├── README.md              # Project documentation  
-├── package.json           # Lists project dependencies and scripts  
-├── vite.config.js         # Vite configuration file  
-└── tailwind.config.js     # Tailwind CSS configuration file  
+- Start the backend server:
 
+    ```bash
+    npm start
+    ```
 
+### 3. Frontend Setup
 
-# React + Vite
+```bash
+cd ../frontend
+npm install
+```
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- Create a `.env` file in `/frontend` with:
 
-Currently, two official plugins are available:
+    ```
+    VITE_API_BASE_URL=https://wordwave-blog-app-backend.onrender.com/api
+    # For local dev: VITE_API_BASE_URL=http://localhost:4005/api
+    ```
+    
+- Start the frontend dev server:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    ```bash
+    npm run dev
+    ```
+
+- Visit [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## 🏗️ Building for Production
+
+To create a production build of the frontend:
+
+```bash
+npm run build
+```
+
+Deploy the contents of the `dist/` folder to your static hosting provider.
+
+---
+
+## 🌐 Deployment (Render)
+
+- **Frontend:** Deploy `/frontend` as a static site on Render.
+- **Backend:** Deploy `/backend` as a web service on Render.
+- **CORS:** Backend must allow the frontend domain and set `credentials: true`.
+- **JWT Cookie:** Set with `httpOnly: true`, `secure: true`, `sameSite: "None"`, and `domain` set to backend domain.
+
+### SPA Routing Fix
+
+For React Router to work on refresh, add a `_redirects` file in `frontend/public`:
+
+```
+/*    /index.html   200
+```
+
+---
+
+## 🛠️ Key Technologies
+
+- **Frontend:** React, Vite, Tailwind CSS, Axios, React Hot Toast
+- **Backend:** Node.js, Express, MongoDB (Mongoose), JWT, bcryptjs, Cloudinary
+- **Deployment:** Render
+
+---
+
+## 📝 API Endpoints (Examples)
+
+- `POST /api/users/register` — Register user
+- `POST /api/users/login` — Login user
+- `GET /api/users/logout` — Logout user
+- `GET /api/blogs` — Get all blogs
+- `GET /api/blogs/single-blog/:id` — Get single blog by ID
+- `POST /api/blogs/create` — Create blog (auth required)
+- `DELETE /api/blogs/:id` — Delete blog (admin only)
+
+---
+
+## 🧑‍💻 Author
+
+**Basavaraj Revani**  
+- [Instagram](https://www.instagram.com/basavaraj_revani)
+- [LinkedIn](https://www.linkedin.com/in/basavarajrevani)
+- [GitHub](https://github.com/basavarajrevani)
+
+---
+
+## ❓ Troubleshooting
+
+- **404 on refresh:** Add `_redirects` file as above.
+- **401/Network errors:** Check cookie settings and CORS configuration.
+- **Images not showing:** Check Cloudinary config and image URLs.
+- **JWT not set:** Ensure backend sets cookie with correct options (`httpOnly`, `secure`, `sameSite: "None"`, `domain`).
+
+---
+
+## 📄 License
+
+This project is for learning and demonstration purposes.
+
+---
+
+*Happy
