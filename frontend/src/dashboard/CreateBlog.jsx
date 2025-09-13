@@ -30,13 +30,18 @@ function CreateBlog() {
 
     formData.append("blogImage", blogImage);
     try {
+      const token = localStorage.getItem("jwt");
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const CREATE_BLOG_URL = `${API_BASE_URL}/blogs/create`;
       const { data } = await axios.post(
-        "http://localhost:4005/api/blogs/create",
+        CREATE_BLOG_URL,
+        // "http://localhost:4005/api/blogs/create",
         formData,
         {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": token ? `Bearer ${token}` : "",
           },
         }
       );

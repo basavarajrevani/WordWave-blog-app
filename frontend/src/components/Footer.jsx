@@ -7,7 +7,7 @@ const Footer = () => {
       <h4 class="text-lg font-mono">Build with 💙 By - Basavaraj Revani</h4>
       <ul class="w-full flex justify-center gap-6 items-center">
         <li class="cursor-pointer hover:text-textgreen">
-          <a href="https://www.instagram.com/_/" target="_blank">
+          <a href="https://www.instagram.com/basavaraj_revani" target="_blank">
             <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" 
              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
              class="w-[20px] h-[20px]">
@@ -19,7 +19,7 @@ const Footer = () => {
           </a>
         </li>
         <li class="cursor-pointer hover:text-textgreen">
-  <a href="https://www.linkedin.com/in/your-profile" target="_blank">
+  <a href="https://www.linkedin.com/in/basavarajrevani" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="currentColor" 
       class="w-[24px] h-[24px]">
       <title>LinkedIn</title>
@@ -34,7 +34,7 @@ const Footer = () => {
 </li>
 
 <li class="cursor-pointer hover:text-textgreen">
-  <a href="https://www.github.com/your-profile" target="_blank">
+  <a href="https://github.com/basavarajrevani" target="_blank">
     <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="currentColor" 
       class="w-[20px] h-[20px]">
       <title>GitHub</title>

@@ -7,8 +7,11 @@ function Creators() {
   useEffect(() => {
     const fetchCreators = async () => {
       try {
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+        const ADMINS_URL = `${API_BASE_URL}/users/admins`;
         const { data } = await axios.get(
-          "http://localhost:4005/api/users/admins",
+          ADMINS_URL,
+          //"http://localhost:4005/api/users/admins",
           {
             withCredentials: true,
           }

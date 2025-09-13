@@ -28,13 +28,16 @@ function UpdateBlog() {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
+        const token = localStorage.getItem("jwt");
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+        const SINGLE_BLOG_URL = `${API_BASE_URL}/blogs/single-blog/${id}`;
         const { data } = await axios.get(
-          `http://localhost:4005/api/blogs/single-blog/${id}`,
-
+          SINGLE_BLOG_URL,
           {
             withCredentials: true,
             headers: {
-              "Content-Type": "multipart/form-data",
+              "Content-Type": "application/json",
+              "Authorization": token ? `Bearer ${token}` : "",
             },
           }
         );
@@ -60,13 +63,17 @@ function UpdateBlog() {
 
     formData.append("blogImage", blogImage);
     try {
+      const token = localStorage.getItem("jwt");
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const UPDATE_BLOG_URL = `${API_BASE_URL}/blogs/update/${id}`;
       const { data } = await axios.put(
-        `http://localhost:4005/api/blogs/update/${id}`,
+        UPDATE_BLOG_URL,
         formData,
         {
           withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": token ? `Bearer ${token}` : "",
           },
         }
       );
