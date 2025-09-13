@@ -7,7 +7,11 @@
 // })
 
 
+<<<<<<< HEAD
 // filepath: d:\WordWave blog-app\frontend\vite.config.js
+=======
+
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
@@ -25,4 +29,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f

@@ -15,11 +15,19 @@ export const AuthProvider = ({ children }) => {
         let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage (Go to login.jsx)
         console.log(token);
         if (token) {
+<<<<<<< HEAD
           const API_BASE_URL = process.env.VITE_API_BASE_URL;
           const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;
           const { data } = await axios.get(
             MY_PROFILE_URL,
             //"http://localhost:4005/api/users/my-profile",
+=======
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new added
+        const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;   // new added
+          const { data } = await axios.get(
+            MY_PROFILE_URL,
+            // "http://localhost:4005/api/users/my-profile",
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
             {
               withCredentials: true,
               headers: {
@@ -39,11 +47,19 @@ export const AuthProvider = ({ children }) => {
 
     const fetchBlogs = async () => {
       try {
+<<<<<<< HEAD
         const API_BASE_URL = process.env.VITE_API_BASE_URL;
         const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`;
         const { data } = await axios.get(
           ALL_BLOGS_URL,
           //"http://localhost:4005/api/blogs/all-blogs",
+=======
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;   // NEW ADDED
+        const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`; ///NEW ADDED 
+        const { data } = await axios.get(
+          ALL_BLOGS_URL,
+          // "http://localhost:4005/api/blogs/all-blogs",
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
           { withCredentials: true }
         );
         console.log(data);

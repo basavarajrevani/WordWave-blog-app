@@ -6,9 +6,15 @@ function Creator() {
   console.log(admin);
   useEffect(() => {
     const fetchAdmins = async () => {
+<<<<<<< HEAD
       try{
         const API_BASE_URL = process.env.VITE_API_BASE_URL;
         const ADMINS_URL = `${API_BASE_URL}/users/admins`;
+=======
+        try{
+        const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new add
+        const ADMINS_URL = `${API_BASE_URL}/users/admins`; // new add
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
       const { data } = await axios.get(
         ADMINS_URL,
        // "http://localhost:4005/api/users/admins",

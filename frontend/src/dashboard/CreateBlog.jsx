@@ -30,12 +30,20 @@ function CreateBlog() {
 
     formData.append("blogImage", blogImage);
     try {
+<<<<<<< HEAD
       const token = localStorage.getItem("jwt");
       const API_BASE_URL = process.env.VITE_API_BASE_URL;
       const CREATE_BLOG_URL = `${API_BASE_URL}/blogs/create`;
       const { data } = await axios.post(
         CREATE_BLOG_URL,
         // "http://localhost:4005/api/blogs/create",
+=======
+      const API_BASE_URL = process.env.VITE_API_BASE_URL; //NEW ADDED 
+      const CREATE_BLOG_URL = `${API_BASE_URL}/blogs/create`; // NEW ADDED 
+      const { data } = await axios.post(
+        CREATE_BLOG_URL,
+       // "http://localhost:4005/api/blogs/create",
+>>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
         formData,
         {
           withCredentials: true,

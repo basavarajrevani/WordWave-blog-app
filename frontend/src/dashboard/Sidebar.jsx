@@ -24,8 +24,11 @@ function Sidebar({ setComponent }) {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
+      const API_BASE_URL = process.env.VITE_API_BASE_URL;  // NEW ADD
+      const LOGOUT_URL = `${API_BASE_URL}/users/logout`;  // NEW ADD
       const { data } = await axios.get(
-        "http://localhost:4005/api/users/logout",
+        LOGOUT_URL,
+        // "http://localhost:4005/api/users/logout",
         { withCredentials: true }
       );
       toast.success(data.message);
