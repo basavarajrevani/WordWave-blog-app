@@ -1,3 +1,84 @@
+// import axios from "axios";
+// import React, { createContext, useContext, useEffect, useState } from "react";
+
+// export const AuthContext = createContext();
+
+// export const AuthProvider = ({ children }) => {
+//   const [blogs, setBlogs] = useState();
+//   const [profile, setProfile] = useState();
+//   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+//   useEffect(() => {
+//     const fetchProfile = async () => {
+//       try {
+//         // token should be let type variable because its value will change in every login. (in backend also)
+//         let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage (Go to login.jsx)
+//         console.log(token);
+//         if (token) {
+//           const API_BASE_URL = process.env.VITE_API_BASE_URL;
+//           const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;
+//           const { data } = await axios.get(
+//             MY_PROFILE_URL,
+//             //"http://localhost:4005/api/users/my-profile",
+//             {
+//               withCredentials: true,
+//               headers: {
+//                 "Content-Type": "application/json",
+//                 "Authorization": `Bearer ${token}`,
+//               },
+//             }
+//           );
+//           console.log(data.user);
+//           setProfile(data.user);
+//           setIsAuthenticated(true);
+//         }
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+
+//     const fetchBlogs = async () => {
+//       try {
+//         const API_BASE_URL = process.env.VITE_API_BASE_URL;
+//         const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`;
+//         const { data } = await axios.get(
+//           ALL_BLOGS_URL,
+//           //"http://localhost:4005/api/blogs/all-blogs",
+//           { withCredentials: true }
+//         );
+//         console.log(data);
+//         setBlogs(data);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+
+//     fetchBlogs();
+//     fetchProfile();
+//   }, []);
+
+//   return (
+//     <AuthContext.Provider
+//       value={{
+//         blogs,
+//         profile,
+//         setProfile,
+//         isAuthenticated,
+//         setIsAuthenticated,
+//       }}
+//     >
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export const useAuth = () => useContext(AuthContext);
+
+
+
+
+
+
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -11,61 +92,37 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // token should be let type variable because its value will change in every login. (in backend also)
-        let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage (Go to login.jsx)
-        console.log(token);
-        if (token) {
-<<<<<<< HEAD
-          const API_BASE_URL = process.env.VITE_API_BASE_URL;
-          const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;
-          const { data } = await axios.get(
-            MY_PROFILE_URL,
-            //"http://localhost:4005/api/users/my-profile",
-=======
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;  // new added
-        const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;   // new added
-          const { data } = await axios.get(
-            MY_PROFILE_URL,
-            // "http://localhost:4005/api/users/my-profile",
->>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
-            {
-              withCredentials: true,
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-              },
-            }
-          );
-          console.log(data.user);
-          setProfile(data.user);
-          setIsAuthenticated(true);
-        }
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+        const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;
+        const { data } = await axios.get(
+          MY_PROFILE_URL,
+          {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setProfile(data.user);
+        setIsAuthenticated(true);
       } catch (error) {
-        console.log(error);
+        setProfile(null);
+        setIsAuthenticated(false);
+        // Optionally handle/log error
       }
     };
 
     const fetchBlogs = async () => {
       try {
-<<<<<<< HEAD
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
         const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`;
         const { data } = await axios.get(
           ALL_BLOGS_URL,
-          //"http://localhost:4005/api/blogs/all-blogs",
-=======
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;   // NEW ADDED
-        const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`; ///NEW ADDED 
-        const { data } = await axios.get(
-          ALL_BLOGS_URL,
-          // "http://localhost:4005/api/blogs/all-blogs",
->>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
           { withCredentials: true }
         );
-        console.log(data);
         setBlogs(data);
       } catch (error) {
-        console.log(error);
+        // Optionally handle/log error
       }
     };
 
