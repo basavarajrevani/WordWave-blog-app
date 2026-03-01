@@ -34,20 +34,22 @@ function App() {
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/about" element={<About />} />
+
+        {/* Protected Routes - Redirect to / if not authenticated */}
+        <Route path="/home" element={isAuthenticated ? <Home /> : <Navigate to="/" />} />
+        <Route path="/blogs" element={isAuthenticated ? <Blogs /> : <Navigate to="/" />} />
+        <Route path="/creators" element={isAuthenticated ? <Creators /> : <Navigate to="/" />} />
+        <Route path="/about" element={isAuthenticated ? <About /> : <Navigate to="/" />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/creators" element={<Creators />} />
+        <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
+
+        {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
 
-        {/* Route for updating a blog */}
-        <Route path="/blog/update/:id" element={<UpdateBlog />} />
-
-        {/* Single blog detail page */}
-        <Route path="/blog/:id" element={<Detail />} />
+        {/* Protected Feature Routes */}
+        <Route path="/blog/update/:id" element={isAuthenticated ? <UpdateBlog /> : <Navigate to="/" />} />
+        <Route path="/blog/:id" element={isAuthenticated ? <Detail /> : <Navigate to="/" />} />
 
         {/* 404 Not Found route */}
         <Route path="*" element={<Notfound />} />

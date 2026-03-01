@@ -225,6 +225,61 @@ function LandingPage() {
                     </div>
                 </div>
 
+                {/* 7.5 About Section (Philosophy) (NEW) */}
+                <div className="py-20 space-y-16">
+                    <div className="text-center space-y-4">
+                        <h2 className="text-white text-5xl font-black italic tracking-tighter">The WordWave Philosophy</h2>
+                        <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div className="text-left space-y-8 p-10 bg-white/[0.02] border border-white/10 rounded-[4rem] backdrop-blur-md">
+                            <p className="text-2xl text-slate-200 font-bold leading-relaxed italic">
+                                "We believe that every word has the power to create a ripple effect. WordWave is more than a blog—it's a digital compass for the modern visionary."
+                            </p>
+                            <div className="space-y-6">
+                                <div className="flex items-start space-x-6 group">
+                                    <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-400 border border-blue-500/20 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xl">
+                                        <FaFeatherAlt size={24} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-black text-xl uppercase tracking-tighter">Artistic Integrity</h4>
+                                        <p className="text-slate-400 text-sm leading-relaxed">Providing a premium space where quality storytelling is valued over clickbait. We prioritize the craft of writing.</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-start space-x-6 group">
+                                    <div className="w-14 h-14 bg-purple-500/10 rounded-2xl flex items-center justify-center text-purple-400 border border-purple-500/20 group-hover:bg-purple-600 group-hover:text-white transition-all shadow-xl">
+                                        <FaGlobeAmericas size={24} />
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white font-black text-xl uppercase tracking-tighter">Digital Connection</h4>
+                                        <p className="text-slate-400 text-sm leading-relaxed">Fostering a global community where ideas transcend borders. Every blog is a bridge to a new perspective.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-6">
+                            <div className="p-8 bg-blue-600/10 border border-blue-500/20 rounded-[3rem] text-center space-y-4 transform hover:scale-105 transition-all">
+                                <div className="text-4xl">🚀</div>
+                                <h5 className="text-white font-black uppercase text-sm tracking-widest">Innovation</h5>
+                            </div>
+                            <div className="p-8 bg-purple-600/10 border border-purple-500/20 rounded-[3rem] text-center space-y-4 mt-12 transform hover:scale-105 transition-all">
+                                <div className="text-4xl">🎨</div>
+                                <h5 className="text-white font-black uppercase text-sm tracking-widest">Creativity</h5>
+                            </div>
+                            <div className="p-8 bg-emerald-600/10 border border-emerald-500/20 rounded-[3rem] text-center space-y-4 transform hover:scale-105 transition-all">
+                                <div className="text-4xl">🤝</div>
+                                <h5 className="text-white font-black uppercase text-sm tracking-widest">Community</h5>
+                            </div>
+                            <div className="p-8 bg-orange-600/10 border border-orange-500/20 rounded-[3rem] text-center space-y-4 mt-12 transform hover:scale-105 transition-all">
+                                <div className="text-4xl">💎</div>
+                                <h5 className="text-white font-black uppercase text-sm tracking-widest">Quality</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* 8. Tech Stack Showcase */}
                 <div className="pt-10 space-y-4 border-t border-white/5 w-full">
                     <p className="text-slate-600 text-[10px] font-black uppercase tracking-[0.4em]">Built with Decentralized Excellence</p>
