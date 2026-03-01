@@ -8,27 +8,17 @@ function MyBlogs() {
   useEffect(() => {
     const fetchMyBlogs = async () => {
       try {
-<<<<<<< HEAD
         const token = localStorage.getItem("jwt");
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
         const MY_BLOG_URL = `${API_BASE_URL}/blogs/my-blog`;
         const { data } = await axios.get(
           MY_BLOG_URL,
-          // "http://localhost:4005/api/blogs/my-blog",
           {
             withCredentials: true,
             headers: {
               "Authorization": token ? `Bearer ${token}` : "",
             },
           }
-=======
-        const API_BASE_URL = process.env.VITE_API_BASE_URL; // NEW ADD
-        const MY_BLOG_URL = `${API_BASE_URL}/blogs/my-blog`; // NEW ADD
-        const { data } = await axios.get(
-          MY_BLOG_URL,
-          // "http://localhost:4005/api/blogs/my-blog",
-          { withCredentials: true }
->>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
         );
         console.log(data);
         setMyBlogs(data);
@@ -39,25 +29,16 @@ function MyBlogs() {
     fetchMyBlogs();
   }, []);
 
-<<<<<<< HEAD
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("jwt");
-      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
       const DELETE_BLOG_URL = `${API_BASE_URL}/blogs/delete/${id}`;
       const res = await axios.delete(DELETE_BLOG_URL, {
         withCredentials: true,
         headers: {
           "Authorization": token ? `Bearer ${token}` : "",
         },
-=======
-const handleDelete = async (id) => {
-    try {
-      const API_BASE_URL = process.env.VITE_API_BASE_URL;   // NEW ADD
-      const DELETE_BLOG_URL = `${API_BASE_URL}/blogs/delete/${id}`;  // NEW ADD
-      const res = await axios.delete(DELETE_BLOG_URL, {
-        withCredentials: true,
->>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
       });
       toast.success(res.data.message || "Blog deleted successfully");
       setMyBlogs((value) => value.filter((blog) => blog._id !== id));

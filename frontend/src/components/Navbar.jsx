@@ -16,7 +16,7 @@ function Navbar() {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = process.env.VITE_API_BASE_URL;
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
       const LOGOUT_URL = `${API_BASE_URL}/users/logout`;
       const { data } = await axios.get(
         LOGOUT_URL,
@@ -35,157 +35,122 @@ function Navbar() {
 
   return (
     <>
-      <nav className=" shadow-lg px-4 py-2">
-        <div className="flex items-center justify-between container mx-auto">
-          <div className="font-semibold text-xl">
-            WordWave<span className="text-blue-500">Blog</span>
-          </div>
-          {/* Desktop */}
-          <div className=" mx-6">
-            <ul className="hidden md:flex space-x-6">
-              <Link to="/" className="hover:text-blue-500">
-                HOME
-              </Link>
-              <Link to="/blogs" className="hover:text-blue-500">
-                BLOGS
-              </Link>
-              <Link to="/creators" className="hover:text-blue-500">
-                CREATORS
-              </Link>
-              <Link to="/about" className="hover:text-blue-500">
-                ABOUT
-              </Link>
-              <Link to="/contact" className="hover:text-blue-500">
-                CONTACT
-              </Link>
-            </ul>
-            <div className="md:hidden" onClick={() => setShow(!show)}>
-              {show ? <IoCloseSharp size={24} /> : <AiOutlineMenu size={24} />}
+      <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass border-b border-slate-200/50">
+        <div className="flex items-center justify-between container mx-auto px-6 h-20">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 group">
+            <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300 shadow-lg shadow-blue-500/20">
+              <span className="text-white text-xl font-bold">W</span>
             </div>
-          </div>
-          <div className="hidden md:flex space-x-2">
-            {isAuthenticated && profile?.user?.role === "admin" ? (
-              <Link
-                to="/dashboard"
-                className="bg-blue-600 text-white font-semibold hover:bg-blue-800 duration-300 px-4 py-2 rounded"
-              >
-                DASHBOARD
-              </Link>
-            ) : (
-              ""
-            )}
+            <div className="font-black text-2xl tracking-tighter text-slate-800">
+              WordWave<span className="text-blue-600">Blog</span>
+            </div>
+          </Link>
 
-            {!isAuthenticated ? (
-              <Link
-                to="/Login"
-                className="bg-red-600 text-white font-semibold hover:bg-red-800 duration-300 px-4 py-2 rounded"
-              >
-                LOGIN
-              </Link>
-            ) : (
-              <div>
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-600 text-white font-semibold hover:bg-red-800 duration-300 px-4 py-2 rounded"
-                >
-                  LOGOUT
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-        {/* mobile navbar */}
-        {show && (
-          <div className="bg-white">
-            <ul className="flex flex-col h-screen items-center justify-center space-y-3 md:hidden text-xl">
-              <Link
-                to="/"
-                onClick={() => setShow(!show)}
-                smooth="true"
-                duration={500}
-                offset={-70}
-                activeClass="active"
-                className="hover:text-blue-500"
-              >
-                HOME
-              </Link>
-              <Link
-                to="/blogs"
-                onClick={() => setShow(!show)}
-                smooth="true"
-                duration={500}
-                offset={-70}
-                activeClass="active"
-                className="hover:text-blue-500"
-              >
-                BLOGS
-              </Link>
-              <Link
-                to="/creators"
-                onClick={() => setShow(!show)}
-                smooth="true"
-                duration={500}
-                offset={-70}
-                activeClass="active"
-                className="hover:text-blue-500"
-              >
-                CREATORS
-              </Link>
-              <Link
-                to="/about"
-                onClick={() => setShow(!show)}
-                smooth="true"
-                duration={500}
-                offset={-70}
-                activeClass="active"
-                className="hover:text-blue-500"
-              >
-                ABOUT
-              </Link>
-              <Link
-                to="/contact"
-                onClick={() => setShow(!show)}
-                smooth="true"
-                duration={500}
-                offset={-70}
-                activeClass="active"
-                className="hover:text-blue-500"
-              >
-                CONTACT
-              </Link>
-              {/* Add Dashboard and Logout buttons for mobile view */}
-              {isAuthenticated && profile?.user?.role === "admin" ? (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <ul className="flex space-x-8">
+              {["HOME", "BLOGS", "CREATORS", "ABOUT", "CONTACT"].map((item) => (
+                <li key={item}>
+                  <Link
+                    to={item === "HOME" ? "/" : `/${item.toLowerCase()}`}
+                    className="text-xs font-black tracking-widest text-slate-500 hover:text-blue-600 transition-colors duration-300 relative group"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="h-6 w-[1px] bg-slate-200 mx-2"></div>
+
+            <div className="flex items-center space-x-4">
+              {isAuthenticated && profile?.user?.role === "admin" && (
                 <Link
                   to="/dashboard"
-                  onClick={() => setShow(!show)}
-                  className="hover:text-blue-500"
+                  className="px-5 py-2.5 bg-slate-900 text-white text-xs font-black tracking-widest rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-900/10"
                 >
                   DASHBOARD
                 </Link>
-              ) : null}
+              )}
+
               {!isAuthenticated ? (
                 <Link
-                  to="/Login"
-                  onClick={() => setShow(!show)}
-                  className="hover:text-blue-500"
+                  to="/login"
+                  className="px-5 py-2.5 bg-blue-600 text-white text-xs font-black tracking-widest rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-xl shadow-blue-600/20"
                 >
-                  LOGIN
+                  SIGN IN
+                </Link>
+              ) : (
+                <button
+                  onClick={handleLogout}
+                  className="px-5 py-2.5 bg-red-50 text-red-600 text-xs font-black tracking-widest rounded-xl hover:bg-red-100 transition-all duration-300"
+                >
+                  LOGOUT
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+            onClick={() => setShow(!show)}
+          >
+            {show ? <IoCloseSharp size={28} /> : <AiOutlineMenu size={28} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation Dropdown */}
+        <div className={`md:hidden absolute top-full left-0 right-0 glass border-b border-slate-200 overflow-hidden transition-all duration-500 ease-in-out ${show ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'}`}>
+          <ul className="container mx-auto px-6 py-8 flex flex-col space-y-6">
+            {["HOME", "BLOGS", "CREATORS", "ABOUT", "CONTACT"].map((item) => (
+              <li key={item}>
+                <Link
+                  to={item === "HOME" ? "/" : `/${item.toLowerCase()}`}
+                  onClick={() => setShow(false)}
+                  className="text-lg font-bold text-slate-800 hover:text-blue-600 transition-colors"
+                >
+                  {item}
+                </Link>
+              </li>
+            ))}
+            <div className="pt-4 border-t border-slate-100 flex flex-col space-y-4">
+              {isAuthenticated && profile?.user?.role === "admin" && (
+                <Link
+                  to="/dashboard"
+                  onClick={() => setShow(false)}
+                  className="w-full py-4 bg-slate-900 text-white text-center font-bold rounded-2xl"
+                >
+                  DASHBOARD
+                </Link>
+              )}
+              {!isAuthenticated ? (
+                <Link
+                  to="/login"
+                  onClick={() => setShow(false)}
+                  className="w-full py-4 bg-blue-600 text-white text-center font-bold rounded-2xl"
+                >
+                  SIGN IN
                 </Link>
               ) : (
                 <button
                   onClick={(e) => {
                     handleLogout(e);
-                    setShow(!show); // Close the menu after logout
+                    setShow(false);
                   }}
-                  className="hover:text-blue-500"
+                  className="w-full py-4 bg-red-50 text-red-600 font-bold rounded-2xl"
                 >
                   LOGOUT
                 </button>
               )}
-            </ul>
-          </div>
-        )}
+            </div>
+          </ul>
+        </div>
       </nav>
+      {/* Spacer to prevent content from hiding under fixed navbar */}
+      <div className="h-20"></div>
     </>
   );
 }

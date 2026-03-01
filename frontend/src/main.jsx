@@ -5,9 +5,10 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { Toaster } from 'react-hot-toast'
 
+console.log("API Base URL:", import.meta.env.VITE_API_BASE_URL);
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <Toaster/>
+    <Toaster />
     <AuthProvider>
       <App />
     </AuthProvider>

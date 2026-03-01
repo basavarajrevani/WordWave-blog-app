@@ -24,8 +24,9 @@ function Sidebar({ setComponent }) {
   const handleLogout = async (e) => {
     e.preventDefault();
     try {
-      const API_BASE_URL = process.env.VITE_API_BASE_URL;  // NEW ADD
-      const LOGOUT_URL = `${API_BASE_URL}/users/logout`;  // NEW ADD
+      const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+      const API_BASE_URL = isLocal ? "http://localhost:4005/api" : (import.meta.env.VITE_API_BASE_URL || "");
+      const LOGOUT_URL = `${API_BASE_URL}/users/logout`;
       const { data } = await axios.get(
         LOGOUT_URL,
         // "http://localhost:4005/api/users/logout",
@@ -52,9 +53,8 @@ function Sidebar({ setComponent }) {
         <CiMenuBurger className="text-2xl" />
       </div>
       <div
-        className={`w-64 h-full shadow-lg fixed top-0 left-0 bg-gray-50 transition-transform duration-300 transform sm:translate-x-0 ${
-          show ? "translate-x-0" : "-translate-x-full"
-        } z-40`} // Added z-40
+        className={`w-64 h-full shadow-lg fixed top-0 left-0 bg-gray-50 transition-transform duration-300 transform sm:translate-x-0 ${show ? "translate-x-0" : "-translate-x-full"
+          } z-40`} // Added z-40
       >
         <div
           className="sm:hidden absolute top-4 right-4 text-xl cursor-pointer"

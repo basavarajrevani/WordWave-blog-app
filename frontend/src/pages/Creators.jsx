@@ -7,19 +7,10 @@ function Creators() {
   useEffect(() => {
     const fetchCreators = async () => {
       try {
-<<<<<<< HEAD
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;
+        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
         const ADMINS_URL = `${API_BASE_URL}/users/admins`;
         const { data } = await axios.get(
           ADMINS_URL,
-          //"http://localhost:4005/api/users/admins",
-=======
-        const API_BASE_URL = process.env.VITE_API_BASE_URL;  // ADD NEW 
-        const ADMINS_URL = `${API_BASE_URL}/users/admins`;   // ADD NEW
-        const { data } = await axios.get(
-          ADMINS_URL,
-          // "http://localhost:4005/api/users/admins",
->>>>>>> bfe214b5fde7d3fcefebade8e53489c0b9fdec1f
           {
             withCredentials: true,
           }

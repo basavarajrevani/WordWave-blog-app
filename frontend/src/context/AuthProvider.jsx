@@ -92,7 +92,8 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        const API_BASE_URL = isLocal ? "http://localhost:4005/api" : (import.meta.env.VITE_API_BASE_URL || "");
         const MY_PROFILE_URL = `${API_BASE_URL}/users/my-profile`;
         const { data } = await axios.get(
           MY_PROFILE_URL,
@@ -103,18 +104,25 @@ export const AuthProvider = ({ children }) => {
             },
           }
         );
-        setProfile(data.user);
-        setIsAuthenticated(true);
+        if (data && data.user) {
+          setProfile(data.user);
+          setIsAuthenticated(true);
+        } else if (data && data._id) {
+          // Alternative structure if returning user directly
+          setProfile(data);
+          setIsAuthenticated(true);
+        }
       } catch (error) {
+        console.error("Profile Fetch Error:", error.response?.data || error.message);
         setProfile(null);
         setIsAuthenticated(false);
-        // Optionally handle/log error
       }
     };
 
     const fetchBlogs = async () => {
       try {
-        const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        const API_BASE_URL = isLocal ? "http://localhost:4005/api" : (import.meta.env.VITE_API_BASE_URL || "");
         const ALL_BLOGS_URL = `${API_BASE_URL}/blogs/all-blogs`;
         const { data } = await axios.get(
           ALL_BLOGS_URL,
@@ -122,7 +130,7 @@ export const AuthProvider = ({ children }) => {
         );
         setBlogs(data);
       } catch (error) {
-        // Optionally handle/log error
+        console.error("Blogs Fetch Error:", error);
       }
     };
 
