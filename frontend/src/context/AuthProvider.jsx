@@ -88,6 +88,7 @@ export const AuthProvider = ({ children }) => {
   const [blogs, setBlogs] = useState();
   const [profile, setProfile] = useState();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -116,6 +117,8 @@ export const AuthProvider = ({ children }) => {
         console.error("Profile Fetch Error:", error.response?.data || error.message);
         setProfile(null);
         setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -146,6 +149,7 @@ export const AuthProvider = ({ children }) => {
         setProfile,
         isAuthenticated,
         setIsAuthenticated,
+        loading,
       }}
     >
       {children}

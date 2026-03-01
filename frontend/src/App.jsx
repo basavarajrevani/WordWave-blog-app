@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import Footer from "./components/Footer";
@@ -14,19 +14,27 @@ import { useAuth } from './context/AuthProvider';
 import { Toaster } from 'react-hot-toast';
 import Detail from './pages/Detail';
 import UpdateBlog from './dashboard/UpdateBlog';
+import LandingPage from './pages/LandingPage';
 import Notfound from './pages/Notfound';
 
 function App() {
   const location = useLocation();
-  const hideNavbarFooter = ['/dashboard', '/login', '/register'].includes(location.pathname);
   const { blogs, isAuthenticated } = useAuth();
+
+  // Custom redirect for authenticated users landing on the splash page
+  if (isAuthenticated && location.pathname === "/") {
+    return <Navigate to="/home" />;
+  }
+  const hideNavbarFooter = ['/', '/dashboard', '/login', '/register'].includes(location.pathname) ||
+    (!isAuthenticated && ['/blogs', '/creators', '/about', '/contact'].includes(location.pathname));
 
   return (
     <div>
       {!hideNavbarFooter && <Navbar />}
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />

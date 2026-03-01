@@ -41,12 +41,12 @@ function Login() {
         toast.success(data.message || "User Logined successfully", {
           duration: 3000,
         });
-        setProfile(data);
+        setProfile(data.user);
         setIsAuthenticated(true);
         setEmail("");
         setPassword("");
         setRole("");
-        navigateTo("/");
+        navigateTo("/home");
       }
     } catch (error) {
       console.error("Login Error:", error);

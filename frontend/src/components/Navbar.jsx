@@ -9,8 +9,8 @@ import toast from "react-hot-toast";
 function Navbar() {
   const [show, setShow] = useState(false);
 
-  const { profile, isAuthenticated, setIsAuthenticated } = useAuth();
-  console.log(profile?.user);
+  const { profile, isAuthenticated, setIsAuthenticated, loading } = useAuth();
+  console.log(profile);
   const navigateTo = useNavigate();
 
   const handleLogout = async (e) => {
@@ -26,7 +26,7 @@ function Navbar() {
       localStorage.removeItem("jwt"); // deleting token in localStorage so that if user logged out it will goes to login page
       toast.success(data.message);
       setIsAuthenticated(false);
-      navigateTo("/login");
+      navigateTo("/");
     } catch (error) {
       console.log(error);
       toast.error("Failed to logout");
@@ -66,7 +66,7 @@ function Navbar() {
             <div className="h-6 w-[1px] bg-slate-200 mx-2"></div>
 
             <div className="flex items-center space-x-4">
-              {isAuthenticated && profile?.user?.role === "admin" && (
+              {!loading && isAuthenticated && profile?.role === "admin" && (
                 <Link
                   to="/dashboard"
                   className="px-5 py-2.5 bg-slate-900 text-white text-xs font-black tracking-widest rounded-xl hover:bg-slate-800 transition-all duration-300 shadow-xl shadow-slate-900/10"
@@ -117,7 +117,7 @@ function Navbar() {
               </li>
             ))}
             <div className="pt-4 border-t border-slate-100 flex flex-col space-y-4">
-              {isAuthenticated && profile?.user?.role === "admin" && (
+              {!loading && isAuthenticated && profile?.role === "admin" && (
                 <Link
                   to="/dashboard"
                   onClick={() => setShow(false)}
